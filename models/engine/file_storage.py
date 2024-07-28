@@ -2,7 +2,7 @@
 """
     deserialization and serialization handler
 """
-# from models import base_model
+from models.base_model import BaseModel
 import json
 import os.path
 
@@ -40,11 +40,12 @@ class FileStorage:
         """
             deserializes the JSON file to __objects
         """
-        path = "/home/cabdisalam/ALX_projects/AirBnB_clone"
-        if os.path.isfile(path):
-            with open(FileStorage.__file_path, "r") as file:
-                objDi = json.load(file)
-                for val in objDi.values():
-                    className = val[__class__]
-                    del val[__class__]
-                    self.new(eval(className)(**val))
+        try:
+            # path = "/home/cabdisalam/ALX_projects/AirBnB_clone"
+            # if os.path.isfile(path):
+            with open(self.__file_path, 'r', encoding="UTF8") as f:
+                for key, value in json.load(f).items():
+                    attri_value = eval(value["__class__"])(**value)
+                    self.__objects[key] = attri_value
+        except FileNotFoundError:
+            pass
