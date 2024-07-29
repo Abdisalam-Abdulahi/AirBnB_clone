@@ -41,7 +41,6 @@ class FileStorage:
             deserializes the JSON file to __objects
         """
         try:
-            # path = "/home/cabdisalam/ALX_projects/AirBnB_clone"
             # if os.path.isfile(path):
             with open(self.__file_path, 'r', encoding="UTF8") as f:
                 for key, value in json.load(f).items():
