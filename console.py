@@ -33,7 +33,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, args):
         if len(args) == 0:
             print("** class name missing **")
-        if args != "BaseModel":
+        elif args != "BaseModel":
             print("** class doesn't exist **")
         else:
             # get_class = getattr(sys.modules[__name__], args)
