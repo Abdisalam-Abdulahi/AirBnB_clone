@@ -27,6 +27,9 @@ class HBNBCommand(cmd.Cmd):
         """
         return True
 
+    def emptyline(self):
+        pass
+
     def do_create(self, args):
         if len(args) == 0:
             print("** class name missing **")
