@@ -4,7 +4,8 @@
 """
 from models.base_model import BaseModel
 import json
-import os.path
+from models.user import User
+# import os.path
 
 
 class FileStorage:

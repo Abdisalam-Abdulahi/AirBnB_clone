@@ -5,6 +5,8 @@
 import cmd
 from models.base_model import BaseModel
 import models
+import sys
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -13,7 +15,12 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = "(hbnb) "
-    glob = ""
+    classes = {'BaseModel': BaseModel,  'User': User}
+    """
+    classes = {'BaseModel': BaseModel, 'Amenity': Amenity,
+               'State': State, 'Place': Place, 'Review': Review,
+               'User': User, 'City': City}
+    """
 
     def do_quit(self, inst):
         """
@@ -33,11 +40,11 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, args):
         if len(args) == 0:
             print("** class name missing **")
-        elif args != "BaseModel":
+        elif args not in self.classes:
             print("** class doesn't exist **")
         else:
-            # get_class = getattr(sys.modules[__name__], args)
-            inst = BaseModel()
+            getCls = getattr(sys.modules[__name__], args)
+            inst = getCls()
             print(inst.id)
             models.storage.save()
         return
@@ -47,7 +54,7 @@ class HBNBCommand(cmd.Cmd):
         li = li[0].split()
         if len(li) == 0:
             print("** class name missing **")
-        elif li[0] != "BaseModel":
+        elif li[0] not in self.classes:
             print("** class doesn't exist **")
         elif len(li) == 1:
             print("** instance id missing **")
@@ -65,7 +72,7 @@ class HBNBCommand(cmd.Cmd):
         li = li[0].split()
         if len(li) == 0:
             print("** class name missing **")
-        elif li[0] != "BaseModel":
+        elif li[0] not in self.classes:
             print("** class doesn't exist **")
         elif len(li) == 1:
             print("** instance id missing **")
@@ -83,7 +90,7 @@ class HBNBCommand(cmd.Cmd):
         tkn = tkn[0].split()
         li = []
         dicti = models.storage.all()
-        if args != "BaseModel":
+        if args not in self.classes:
             print("** class doesn't exist **")
         elif len(tkn) == 0:
             for val in dicti:
@@ -110,7 +117,7 @@ class HBNBCommand(cmd.Cmd):
         li = li[0].split()
         if len(li) == 0:
             print("** class name missing **")
-        elif li[0] != "BaseModel":
+        elif li[0] not in self.classes:
             print("** class doesn't exist **")
         elif len(li) == 1:
             print("** instance id missing **")
