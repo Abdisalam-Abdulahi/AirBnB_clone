@@ -37,9 +37,15 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self):
+        """
+        do nothing
+        """
         pass
 
     def do_create(self, args):
+        """
+        create intstance from a class
+        """
         if len(args) == 0:
             print("** class name missing **")
         elif args not in self.classes:
@@ -52,6 +58,9 @@ class HBNBCommand(cmd.Cmd):
         return
 
     def do_show(self, args):
+        """
+        show instance based on id
+        """
         li = [args]
         li = li[0].split()
         if len(li) == 0:
@@ -70,6 +79,9 @@ class HBNBCommand(cmd.Cmd):
         return
 
     def do_destroy(self, args):
+        """
+        destroy intstance based on id
+        """
         li = [args]
         li = li[0].split()
         if len(li) == 0:
@@ -88,6 +100,9 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_all(self, args):
+        """
+        display all instances
+        """
         tkn = [args]
         tkn = tkn[0].split()
         li = []
@@ -115,6 +130,9 @@ class HBNBCommand(cmd.Cmd):
             print(li)
 
     def do_update(self, args):
+        """
+        update instances
+        """
         li = [args]
         li = li[0].split()
         if len(li) == 0:
